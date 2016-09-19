@@ -32,12 +32,26 @@ nrow(subset(file5_train, file5_train$VALID == "No")) # 122
 nrow(subset(file5_test, file5_test$VALID == "Yes")) # 21
 nrow(subset(file5_test, file5_test$VALID == "No")) # 53
 
+# CONVERTING THE DATA TYPES
+
+file5_train$CONTENT.ID <- as.numeric(file5_train$CONTENT.ID)
+file5_train$CONTENT.TEXT <- as.character(file5_train$CONTENT.TEXT)
+file5_train$CONTENT.MEDIA.TYPE <- as.numeric(file5_train$CONTENT.MEDIA.TYPE)
+file5_train$CONTENT.PUBLISH.DATE <- as.character(file5_train$CONTENT.PUBLISH.DATE)
+
+file5_test$CONTENT.ID <- as.numeric(file5_test$CONTENT.ID)
+file5_test$CONTENT.TEXT <- as.character(file5_test$CONTENT.TEXT)
+file5_test$CONTENT.MEDIA.TYPE <- as.numeric(file5_test$CONTENT.MEDIA.TYPE)
+file5_test$CONTENT.PUBLISH.DATE <- as.character(file5_test$CONTENT.PUBLISH.DATE)
+
 # Building the model
 library(e1071)
 model <- naiveBayes(file5_train$VALID ~ ., data = file5_train)
+model <- naiveBayes(file5_train$VALID ~ file5_train$CONTENT.TEXT, data = file5_train)
 model
 #pred <- predict(model, file5_test[,-1])
 pred <- predict(model, file5_test[,c(1:4)])
+pred <- predict(model, file5_test[,2])
 pred
 table(pred, file5_test$VALID)
 table(pred, file5_test$VALID, dnn = c("Predicted", "Actual"))
@@ -53,7 +67,11 @@ model_incorrect_class
 12/14 # Type II error = 0.8571429
 
 
-
+class(file5_train) #Data frame
+class(file5_train$CONTENT.ID) # Integer
+class(file5_train$CONTENT.TEXT) # factor
+class(file5_train$CONTENT.MEDIA.TYPE) # factor
+class(file5_train$CONTENT.PUBLISH.DATE) # factor
 
 
 

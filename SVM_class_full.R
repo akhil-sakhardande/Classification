@@ -1,6 +1,6 @@
-# R script to implement SVM on text data
+# R script to implement SVM on text data & train the model on entire data
 
-rm(list = ls())
+#rm(list = ls())
 getwd()
 
 # Reading the file
@@ -11,49 +11,22 @@ names(file5)
 file5$X <- NULL #Not useful column
 names(file5)
 
-#Sampling - Random sampling
-library(caTools)
-train_rows <- sample.split(file5$VALID, SplitRatio=0.8)
-train_rows
-file5_train <- file5[train_rows,]
-file5_test <- file5[!train_rows,]
-nrow(file5_train)
-nrow(file5_test)
-
-#Sampling - Stratified sampling
-install.packages("caret")
-library(caret)
-set.seed(998)
-index <- createDataPartition(file5$VALID, p = .75, list = FALSE)
-index
-file5_train <- file5[index,]
-file5_test <- file5[!index,]
-nrow(file5_train)
-nrow(file5_test)
-
-# Checking the value distribution (Records in the sample sets)
-nrow(subset(file5_train, file5_train$VALID == "Yes")) # 49
-nrow(subset(file5_train, file5_train$VALID == "No")) # 122
-
-nrow(subset(file5_test, file5_test$VALID == "Yes")) # 21
-nrow(subset(file5_test, file5_test$VALID == "No")) # 53
-
 # Creating a DTM matrix
 #install.packages("RTextTools")
 library(RTextTools)
-names(file5_train)
-head(file5_train["CONTENT.TEXT"],2)
-file5_train.mat <- create_matrix(file5_train["CONTENT.TEXT"])
-file5_train.mat
+names(file5)
+head(file5["CONTENT.TEXT"],2)
+file5.mat <- create_matrix(file5["CONTENT.TEXT"])
+file5.mat
 
 # Create and train the SVM model
 # Configure the training data
-nrow(file5_train)
-container.train <- create_container(file5_train.mat, file5_train$VALID, trainSize=1:nrow(file5_train), virgin=FALSE)
+nrow(file5)
+container <- create_container(file5.mat, file5$VALID, trainSize=1:nrow(file5), virgin=FALSE)
 
 # train a SVM Model
 #model <- train_model(container.train, "SVM", kernel="linear", cost=1)
-model <- train_model(container.train, "SVM", kernel="radial", cost=1)
+model <- train_model(container, "SVM", kernel="radial", cost=1)
 model
 
 # create a prediction document term matrix
