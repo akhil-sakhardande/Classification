@@ -1,4 +1,5 @@
 # R script to implement Random Forest
+# Author: Akhil Sakhardande
 
 getwd()
 #setwd("/home/asakhardhande04_sm/codes_akhil/tata_cap/")

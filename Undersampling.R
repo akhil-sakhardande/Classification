@@ -1,4 +1,5 @@
 # Balancing the dataset for equal groups
+# Author: Akhil Sakhardande
 
 nrow(subset(file5, file5$VALID == "Yes"))
 file50 <- subset(file5, file5$VALID == "Yes")

@@ -1,6 +1,7 @@
 # R script to add Link column
 
-getwd()
+
+# Author: Akhil Sakhardandegetwd()
 setwd("/tcad2/client04_sm/Akhil/TC_files")
 
 f1 <- read.csv(file = "SocialMedia_CollatedData_24JUN2016_Filtered.csv", header=TRUE)[,c(2,5)]

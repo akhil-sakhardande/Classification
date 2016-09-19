@@ -1,6 +1,7 @@
 # R script to implement Recurrent Neural Networks
 
-getwd()
+
+# Author: Akhil Sakhardandegetwd()
 #setwd("/home/asakhardhande04_sm/codes_akhil/tata_cap/")
 
 # Reading the file

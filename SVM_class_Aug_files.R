@@ -1,4 +1,5 @@
 # R code to execute SVM on Aug files
+# Author: Akhil Sakhardande
 
 # Starting the modeling
 

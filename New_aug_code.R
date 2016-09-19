@@ -1,4 +1,5 @@
 # Modeling the new Aug files
+# Author: Akhil Sakhardande
 
 # setting directories
 

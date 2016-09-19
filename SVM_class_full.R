@@ -1,4 +1,5 @@
 # R script to implement SVM on text data & train the model on entire data
+# Author: Akhil Sakhardande
 
 #rm(list = ls())
 getwd()
